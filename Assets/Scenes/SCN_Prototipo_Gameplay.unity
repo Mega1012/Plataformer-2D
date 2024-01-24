@@ -428,6 +428,8 @@ MonoBehaviour:
   friction: {x: -0.1, y: 0}
   speed: 10
   forcejump: 15
+  speedrun: 15
+  _currentSpeed: 0
 --- !u!1 &908333349
 GameObject:
   m_ObjectHideFlags: 0
