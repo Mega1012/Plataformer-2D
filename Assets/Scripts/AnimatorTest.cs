@@ -6,7 +6,7 @@ public class AnimatorTest : MonoBehaviour
 {
     public Animator animator;
 
-    public KeyCode KeyToTrigger = KeyCode.A;
+    public KeyCode KeyToTrigger = KeyCode.O;
     public KeyCode KeyToExit = KeyCode.S;
     public string TriggerToPlay = "Run";
 

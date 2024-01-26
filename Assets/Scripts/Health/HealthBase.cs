@@ -1,18 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBase : MonoBehaviour
 {
+    public Action OnKill;
+
     public int startLife = 10;
+
     public bool destroyOnKill = false;
     private int _currentLife;
     private bool _isDead = false;
+
     public float delayToKill = 0f;
+
+    public FlashColor flashColor;
 
     private void Awake()
     {
         Init();
+        if(flashColor == null)
+        {
+            flashColor = GetComponent<FlashColor>();
+        }
     }
 
     private void Init()
@@ -32,6 +43,12 @@ public class HealthBase : MonoBehaviour
         {
             Kill();
         }
+
+        if(flashColor != null)
+        {
+            flashColor.Flash();
+        }
+
     }
 
 
@@ -43,5 +60,7 @@ public class HealthBase : MonoBehaviour
         {
             Destroy(gameObject, delayToKill);
         }
+
+        OnKill?.Invoke();
     }
 }

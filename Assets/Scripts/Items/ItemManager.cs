@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager Instance;
-    
+
     public int coins;
 
     private void Awake()
@@ -14,7 +14,6 @@ public class ItemManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-        
     }
 
     private void Start()
