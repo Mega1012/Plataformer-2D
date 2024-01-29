@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Plataformer.Core.Singleton;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : Singleton<ItemManager>
 {
     public static ItemManager Instance;
-    public int coins;
+    public SOInt coins;
     public TextMeshProUGUI uiTextCoins;
 
     private void Awake()
@@ -24,19 +25,20 @@ public class ItemManager : MonoBehaviour
 
     private void Reset()
     {
-        coins = 0;
+        coins.value = 0;
         UpdateUI();
     }
 
     public void AddCoins(int amount = 1)
     {
-        coins += amount;
+        coins.value += amount;
         UpdateUI();
     }
 
     private void UpdateUI()
     {
-        uiTextCoins.text = coins.ToString();
+        //uiTextCoins.text = coins.ToString();
+        //UiInGameManager.instance.UpdateTextCoins(coins.value.ToString());
     }
 
 }
