@@ -2559,6 +2559,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   compareTag: Player
   particleSystem: {fileID: 0}
+  timeToHide: 3
+  graphicItem: {fileID: 0}
 --- !u!1 &772195738
 GameObject:
   m_ObjectHideFlags: 0
@@ -6642,7 +6644,7 @@ PrefabInstance:
     - target: {fileID: 5193516475554486563, guid: 0f3cf150bbbc6404abb5e1b7bbed6393, type: 3}
       propertyPath: CollisionModule.m_Planes.Array.data[0]
       value: 
-      objectReference: {fileID: 1784827654}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
