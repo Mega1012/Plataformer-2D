@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   compareTag: Player
   particleSystem: {fileID: 5193516475554486563}
-  timeToHide: 0.5
+  timeToHide: 0.3
   graphicItem: {fileID: 1687737730646700856}
 --- !u!58 &901150101166311406
 CircleCollider2D:
