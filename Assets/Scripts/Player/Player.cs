@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     public ParticleSystem jumpVFX;
     public AudioSource audioSourceJump;
 
+    private int _playerDirection = 1;
+
     private void Awake()
     {
         if(healthBase != null)
@@ -80,6 +82,7 @@ public class Player : MonoBehaviour
                 myRigidbody.transform.DOScaleX(-1, SOPlayerSetup.playerSwipeDuration);
             }
             _currentPlayer.SetBool(SOPlayerSetup.boolRun, true);
+            _playerDirection = -1;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -89,6 +92,7 @@ public class Player : MonoBehaviour
                 myRigidbody.transform.DOScaleX(1, SOPlayerSetup.playerSwipeDuration);
             }
             _currentPlayer.SetBool(SOPlayerSetup.boolRun, true);
+            _playerDirection = 1;
         }
         else
         {
@@ -105,6 +109,7 @@ public class Player : MonoBehaviour
         }
     }
 
+
     private void HandleJump()
     {
         if (Input.GetKey(KeyCode.Space) && IsGrounded())
@@ -112,6 +117,7 @@ public class Player : MonoBehaviour
             myRigidbody.velocity = Vector2.up * SOPlayerSetup.forcejump;
             myRigidbody.transform.localScale = Vector2.one;
 
+            if (tween != null) tween.Kill();
             DOTween.Kill(myRigidbody.transform);
             HandleScaleJump();
             PlayJumpVFX();
@@ -124,12 +130,23 @@ public class Player : MonoBehaviour
         if(audioSourceJump != null) audioSourceJump.Play();
     }
 
-
+    Tweener tween;
     private void HandleScaleJump()
     {
         myRigidbody.transform.DOScaleY(SOPlayerSetup.jumpScaleY, SOPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(SOPlayerSetup.ease);
-        myRigidbody.transform.DOScaleX(SOPlayerSetup.jumpScaleX, SOPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(SOPlayerSetup.ease);
+        tween = DOTween.To(ScaleXGetter, ScaleXSetter, SOPlayerSetup.jumpScaleX, SOPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(SOPlayerSetup.ease);
+    }
 
+    private float ScaleXGetter()
+    {
+        return myRigidbody.transform.localScale.x;
+    }
+
+    private void ScaleXSetter(float value)
+    {
+        var s = myRigidbody.transform.localScale;
+        s.x = value * _playerDirection;
+        myRigidbody.transform.localScale = s;
     }
 
     public void DestroyMe()
