@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public float distToGround;
     public float spaceToGround = .1f;
     public ParticleSystem jumpVFX;
-
+    public AudioSource audioSourceJump;
 
     private void Awake()
     {
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
     private void PlayJumpVFX()
     {
         VFXManager.instance.PlayVFXByType(VFXManager.VFXType.JUMP, transform.position);
-        //if (jumpVFX != null) jumpVFX.Play();
+        if(audioSourceJump != null) audioSourceJump.Play();
     }
 
 

@@ -12,13 +12,21 @@ public class GunBase : MonoBehaviour
 
     private Coroutine _currentCorroutine;
 
+    public KeyCode keyCode = KeyCode.Z;
+    public AudioRandomPlayAudioClips randomShoot;
+
+    private void Awake()
+    {
+        playerSideReference = GameObject.FindAnyObjectByType<Player>().transform;
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             _currentCorroutine = StartCoroutine(StarShoot());
         }
-        else if (Input.GetKeyUp(KeyCode.S))
+        else if (Input.GetKeyUp(KeyCode.Z))
         {
             if (_currentCorroutine != null)
                 StopCoroutine(_currentCorroutine);
